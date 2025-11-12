@@ -1,0 +1,110 @@
+body {
+    background-color: darkslateblue;
+    color: whitesmoke;
+    overflow-x: hidden;
+    padding: 0 40px;
+    text-align: center;
+}
+
+button {
+    color: whitesmoke;
+    border: 0;
+    border-radius: 0.2em;
+    background-color: #222;
+    padding: 6px 10px;
+    margin: 2px;
+    cursor: pointer;
+}
+button:hover {
+    color: deeppink;
+}
+
+.cars-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); */
+}
+
+.car-preview {
+    flex-grow: 1;
+    width: 120px;
+    margin: 0.5em;
+    background-color: white;
+    color: darkviolet;
+    border: 1px solid lightgray;
+    border-radius: 0.2em;
+    text-align: center;
+    padding: 5px;
+}
+.car-preview .btn-remove {
+    float: right;
+}
+
+.car-preview img {
+    max-width: 100%;
+}
+
+.car-preview h5 {
+    font-size: 1.4em;
+    text-transform: capitalize;
+    text-decoration: overline;
+}
+
+.car-preview h6 span {
+    color: tomato;
+    font-size: 2em;
+}
+
+.car-filter {
+    background-color: indigo;
+    padding: 10px;
+    margin: 20px 0px;
+    min-width: 130px;
+}
+.filter-vendor-select {
+    text-transform: capitalize;
+}
+.car-filter hr {
+    margin: 30px;
+}
+
+.modal {
+    background-color: #111;
+    padding: 10px;
+    position: fixed;
+    top: 0px;
+    left: 150%;
+    max-height: 85vh;
+    min-width: 350px;
+    text-align: center;
+    transition: left 0.5s;
+}
+.modal.open {
+    left: 10%;
+}
+.modal h3 {
+    color: pink;
+    text-decoration: overline;
+    text-transform: capitalize;
+}
+.modal h4 span {
+    color: pink;
+}
+.modal > p {
+    text-align: left;
+}
+
+.user-msg {
+    position: fixed;
+    bottom: -100px;
+    right: 10px;
+    background-color: #111;
+    padding: 10px;
+}
+.user-msg.open {
+    bottom: 10px;
+    transition: bottom 0.5s;
+}
