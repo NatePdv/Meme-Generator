@@ -3,7 +3,7 @@
 $(onInit)
 
 function onInit() {
-    renderCars()
+    renderMeme()
     renderVendors()
     renderFilterByQueryStringParams()
 
@@ -11,7 +11,7 @@ function onInit() {
 }
 
 function addEventListeners() {
-    $('.btn-add').on('click', onAddCar)
+    $('.btn-add').on('click', onAddMeme)
     // console.log($('.btn-add'))
     $('.btn-next').on('click', onNextPage)
     $('.modal button').on('click', onCloseModal)
@@ -30,34 +30,34 @@ function addEventListeners() {
     })
 }
 
-function renderCars() {
-    var cars = getCars()
-    var strHtmls = cars.map(car => `
-        <article data-id="${car.id}" class="car-preview">
+function renderMeme() {
+    var meme = getMemes()
+    var strHtmls = meme.map(meme => `
+        <article data-id="${meme.id}" class="meme-preview">
             <button class="btn-remove">X</button>
-            <h5>${car.vendor}</h5>
-            <h6>Up to <span>${car.maxSpeed}</span> KMH</h6>
+            <h5>${meme.vendor}</h5>
+            <h6>Up to <span>${meme.maxSpeed}</span> KMH</h6>
             <button class="btn-read" >Details</button>
             <button class="btn-update" >Update</button>
-            <img onerror="this.src='img/fiat.png'" src="img/${car.vendor}.png" alt="Car by ${car.vendor}">
+            <img onerror="this.src='img/fiat.png'" src="img/${meme.vendor}.png" alt="Meme by ${meme.vendor}">
         </article> 
         `
     )
-    $('.cars-container').html(strHtmls)
+    $('.meme-container').html(strHtmls)
 
     $('.btn-remove').on('click', function () {
-        const carId = $(this).closest('.car-preview').data('id')
-        onDeleteCar(carId)
+        const memeId = $(this).closest('.meme-preview').data('id')
+        onDeleteMeme(memeId)
     })
 
     $('.btn-read').on('click', function () {
-        const carId = $(this).closest('.car-preview').data('id')
-        onReadCar(carId)
+        const memeId = $(this).closest('.meme-preview').data('id')
+        onReadMeme(memeId)
     })
 
     $('.btn-update').on('click', function () {
-        const carId = $(this).closest('.car-preview').data('id')
-        onUpdateCar(carId)
+        const memeId = $(this).closest('.meme-preview').data('id')
+        onUpdateMeme(memeId)
     })
 }
 
@@ -68,12 +68,12 @@ function renderVendors() {
     $('.filter-vendor-select').append(strHTMLs)
 }
 
-function onReadCar(carId) {
-    var car = getCarById(carId)
+function onReadMeme(memeId) {
+    var meme = getMemeById(memeId)
     var $elModal = $('.modal')
-    $elModal.children('h3').text(car.vendor)
-    $elModal.find('h4 span').text(car.maxSpeed)
-    $elModal.children('p').text(car.desc)
+    $elModal.children('h3').text(meme.vendor)
+    $elModal.find('h4 span').text(meme.maxSpeed)
+    $elModal.children('p').text(meme.desc)
     $elModal.addClass('open')
 }
 
@@ -90,38 +90,38 @@ function onCloseModal() {
     $('.modal').removeClass('open')
 }
 
-function onDeleteCar(carId) {
-    deleteCar(carId)
-    renderCars()
-    flashMsg(`Car Deleted`)
+function onDeleteMeme(memeId) {
+    deleteMeme(memeId)
+    renderMeme()
+    flashMsg(`Meme Deleted`)
 }
 
-function onAddCar() {
+function onAddMeme() {
     var vendor = prompt('vendor?')
     if (vendor) {
-        const car = addCar(vendor)
-        renderCars()
-        flashMsg(`Car Added (id: ${car.id})`)
+        const meme = addMeme(vendor)
+        renderMeme()
+        flashMsg(`Meme Added (id: ${meme.id})`)
     }
 }
 
-function onUpdateCar(carId) {
-    const car = getCarById(carId)
-    var newSpeed = +prompt('Speed?', car.maxSpeed)
+function onUpdateMeme(memeId) {
+    const meme = getMemeById(memeId)
+    var newSpeed = +prompt('Speed?', meme.maxSpeed)
     if (newSpeed) {
-        const car = updateCar(carId, newSpeed)
-        renderCars()
-        flashMsg(`Speed updated to: ${car.maxSpeed}`)
+        const meme = updateMeme(memeId, newSpeed)
+        renderMeme()
+        flashMsg(`Speed updated to: ${meme.maxSpeed}`)
     }
 }
 
 function onSetFilterBy(filterBy) {
-    filterBy = setCarFilter(filterBy)
+    filterBy = setMemeFilter(filterBy)
     const queryStringParams = `?vendor=${gFilterBy.vendor}&minSpeed=${gFilterBy.minSpeed}`
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
 
-    renderCars()
+    renderMeme()
 }
 
 function onSetSortBy() {
@@ -131,13 +131,13 @@ function onSetSortBy() {
     const sortBy = {
         [prop]: (isDesc) ? -1 : 1
     }
-    setCarSort(sortBy)
-    renderCars()
+    setMemeSort(sortBy)
+    renderMeme()
 }
 
 function onNextPage() {
     nextPage()
-    renderCars()
+    renderMeme()
 }
 
 function renderFilterByQueryStringParams() {
@@ -149,6 +149,6 @@ function renderFilterByQueryStringParams() {
 
     $('.filter-vendor-select').val(filterBy.vendor)
     $('.filter-speed-range').val(filterBy.minSpeed)
-    setCarFilter(filterBy)
-    renderCars()
+    setMemeFilter(filterBy)
+    renderMeme()
 }
