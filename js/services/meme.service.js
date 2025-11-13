@@ -1,7 +1,6 @@
 'use strict'
 const STORAGE_KEY = 'memeDB'
 const PAGE_SIZE = 5
-const gVendors = ['audi', 'fiat', 'suzuki', 'honda']
 var gImgs = [{id: 1, url: 'img/1.jpg', keywords: ['funny', 'cat']}]
 
 
