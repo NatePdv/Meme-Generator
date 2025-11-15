@@ -11,9 +11,6 @@ var gPageIdx = 0
 
 _createMeme()
 
-function getVendors() {
-    return gVendors
-}
 
 function getMeme() {
     var meme = gMeme.filter(meme => meme.vendor.includes(gFilterBy.vendor) &&

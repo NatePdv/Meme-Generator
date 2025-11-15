@@ -9,30 +9,19 @@
     <title>Meme Generator</title>
 </head>
 
-<body>
-    <h1>Meme Generator</h1>
-    <section class="meme-filter">
-        <h2>Filter</h2>
-        <select class="filter-vendor-select">
-            <option value="">Select Vendor</option>
-        </select> Min Speed:
-        <input type="range" min="0" max="300" value="0" class="filter-speed-range" />
-        <hr />
-        <div>
-            Sort by:
-            <select class="sort-by">
-                <option value="">Select Sorting</option>
-                <option value="vendor">By Vendor</option>
-                <option value="maxSpeed">Speed</option>
-            </select>
-            <label>
-                Descending
-                <input class="sort-desc" type="checkbox" />
-            </label>
-        </div>
-    </section>
-    <button title="Add Meme" class="btn-add">Add Meme</button>
-    <section class="memes-container"></section>
+<body onload="onInit()">
+    <header>
+        <div class="logo">Meme Generator</div>
+        <nav>
+            <button class="btn-gallery" onclick="">Gallery</div>
+                <button class="btn-memes">Memes</div>
+                    <button class="nav-about">About</div>
+        </nav>
+    </header>
+
+    <!-- <button title="Add Meme" class="btn-add">Add Meme</button> -->
+    <!-- <section class="memes-container"></section> -->
+    <section class="galley-container"></section>
     <button class="btn-next">Next Page</button>
     <div class="modal">
         <h3></h3>
@@ -47,7 +36,9 @@
     <script src="lib/jquery-3.7.1.js"></script>
     <script src="js/services/util.service.js"></script>
     <script src="js/services/storage.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
+    <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>
 
 </body>
