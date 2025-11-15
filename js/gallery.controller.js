@@ -3,15 +3,13 @@
 $(onInit)
 
 function onInit() {
-    renderMeme()
-    renderVendors()
-    renderFilterByQueryStringParams()
+    renderGallery()
 
     addEventListeners()
 }
 
 function addEventListeners() {
-    $('.btn-gallery').on('click', onAddMeme)
+    $('.btn-gallery').on('click', onAddGallery)
     $('.btn-gallerys').on('click', onNextPage)
     $('.btn-about').on('click', onNextPage)
 
@@ -36,9 +34,9 @@ function renderGallery() {
     var gallery = getGallery()
     var strHtmls = gallery.map(gallery => `
         <article data-id="${gallery.id}" class="gallery-preview">
+        <img src="${gallery.url}" class="gallery-img">
             <button class="btn-remove">X</button>
-            <h5>${gallery.vendor}</h5>
-            <h6>Up to <span>${gallery.maxSpeed}</span> KMH</h6>
+            <h5 class="gallery-keyword">${gallery.keywords}</h5>
             <button class="btn-read" >Details</button>
             <button class="btn-update" >Update</button>
         </article> 
@@ -48,17 +46,17 @@ function renderGallery() {
 
     $('.btn-remove').on('click', function () {
         const galleryId = $(this).closest('.gallery-preview').data('id')
-        onDeleteMeme(galleryId)
+        onDeleteGallery(galleryId)
     })
 
     $('.btn-read').on('click', function () {
         const galleryId = $(this).closest('.gallery-preview').data('id')
-        onReadMeme(galleryId)
+        onReadGallery(galleryId)
     })
 
     $('.btn-update').on('click', function () {
         const galleryId = $(this).closest('.gallery-preview').data('id')
-        onUpdateMeme(galleryId)
+        onUpdateGallery(galleryId)
     })
 }
 
@@ -69,8 +67,8 @@ function renderVendors() {
     $('.filter-vendor-select').append(strHTMLs)
 }
 
-function onReadMeme(galleryId) {
-    var gallery = getMemeById(galleryId)
+function onReadGallery(galleryId) {
+    var gallery = getGalleryById(galleryId)
     var $elModal = $('.modal')
     $elModal.children('h3').text(gallery.vendor)
     $elModal.find('h4 span').text(gallery.maxSpeed)
@@ -91,38 +89,38 @@ function onCloseModal() {
     $('.modal').removeClass('open')
 }
 
-function onDeleteMeme(galleryId) {
-    deleteMeme(galleryId)
-    renderMeme()
-    flashMsg(`Meme Deleted`)
+function onDeleteGallery(galleryId) {
+    deleteGallery(galleryId)
+    renderGallery()
+    flashMsg(`Gallery Deleted`)
 }
 
-function onAddMeme() {
+function onAddGallery() {
     var vendor = prompt('vendor?')
     if (vendor) {
-        const gallery = addMeme(vendor)
-        renderMeme()
-        flashMsg(`Meme Added (id: ${gallery.id})`)
+        const gallery = addGallery(vendor)
+        renderGallery()
+        flashMsg(`Gallery Added (id: ${gallery.id})`)
     }
 }
 
-function onUpdateMeme(galleryId) {
-    const gallery = getMemeById(galleryId)
+function onUpdateGallery(galleryId) {
+    const gallery = getGalleryById(galleryId)
     var newSpeed = +prompt('Speed?', gallery.maxSpeed)
     if (newSpeed) {
-        const gallery = updateMeme(galleryId, newSpeed)
-        renderMeme()
+        const gallery = updateGallery(galleryId, newSpeed)
+        renderGallery()
         flashMsg(`Speed updated to: ${gallery.maxSpeed}`)
     }
 }
 
 function onSetFilterBy(filterBy) {
-    filterBy = setMemeFilter(filterBy)
+    filterBy = setGalleryFilter(filterBy)
     const queryStringParams = `?vendor=${gFilterBy.vendor}&minSpeed=${gFilterBy.minSpeed}`
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
 
-    renderMeme()
+    renderGallery()
 }
 
 function onSetSortBy() {
@@ -132,13 +130,13 @@ function onSetSortBy() {
     const sortBy = {
         [prop]: (isDesc) ? -1 : 1
     }
-    setMemeSort(sortBy)
-    renderMeme()
+    setGallerySort(sortBy)
+    renderGallery()
 }
 
 function onNextPage() {
     nextPage()
-    renderMeme()
+    renderGallery()
 }
 
 function renderFilterByQueryStringParams() {
@@ -150,6 +148,6 @@ function renderFilterByQueryStringParams() {
 
     $('.filter-vendor-select').val(filterBy.vendor)
     $('.filter-speed-range').val(filterBy.minSpeed)
-    setMemeFilter(filterBy)
-    renderMeme()
+    setGalleryFilter(filterBy)
+    renderGallery()
 }
