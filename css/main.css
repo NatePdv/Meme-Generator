@@ -1,9 +1,40 @@
+@font-face {
+    font-family: lato;
+    /* set name */
+    src: url(fonts/lato/Lato-BlackItalic.ttf)
+}
+
 body {
-    background-color: darkslateblue;
+    background-color: yellow;
     color: whitesmoke;
     overflow-x: hidden;
     padding: 0 40px;
     text-align: center;
+}
+
+header {
+    background-color: white;
+    border: 0;
+    border-radius: 0.2em;
+    position:fixed
+    
+
+}
+
+
+
+nav {
+    position: sticky;
+    display: flex;
+    flex-flow: row-reverse;
+
+}
+.logo {
+    font-family: lato;
+    text-align: left;
+    color: green;
+
+
 }
 
 button {
@@ -15,6 +46,7 @@ button {
     margin: 2px;
     cursor: pointer;
 }
+
 button:hover {
     color: deeppink;
 }
@@ -29,16 +61,18 @@ button:hover {
 }
 
 .gallery-preview {
+    font-family: lato;
     flex-grow: 1;
     width: 120px;
     margin: 0.5em;
     background-color: white;
-    color: darkviolet;
+    color: blue;
     border: 1px solid lightgray;
     border-radius: 0.2em;
     text-align: center;
     padding: 5px;
 }
+
 .gallery-preview .btn-remove {
     float: right;
 }
@@ -64,9 +98,11 @@ button:hover {
     margin: 20px 0px;
     min-width: 130px;
 }
+
 .filter-vendor-select {
     text-transform: capitalize;
 }
+
 .gallery-filter hr {
     margin: 30px;
 }
@@ -82,18 +118,22 @@ button:hover {
     text-align: center;
     transition: left 0.5s;
 }
+
 .modal.open {
     left: 10%;
 }
+
 .modal h3 {
     color: pink;
     text-decoration: overline;
     text-transform: capitalize;
 }
+
 .modal h4 span {
     color: pink;
 }
-.modal > p {
+
+.modal>p {
     text-align: left;
 }
 
@@ -104,6 +144,7 @@ button:hover {
     background-color: #111;
     padding: 10px;
 }
+
 .user-msg.open {
     bottom: 10px;
     transition: bottom 0.5s;
